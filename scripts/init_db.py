@@ -1,17 +1,14 @@
-from sqlalchemy import create_engine
-from app.core.config import get_settings
+import asyncio
 from app.db.base import Base
 from app.db import models  # noqa: F401
+from app.db.session import engine
 
 
-def init_db() -> None:
-    settings = get_settings()
-    sync_url = settings.postgres_url.replace("+asyncpg", "+psycopg")
-    engine = create_engine(sync_url, future=True)
-    with engine.begin() as conn:
-        Base.metadata.create_all(bind=conn)
-    engine.dispose()
+async def init_db() -> None:
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    await engine.dispose()
 
 
 if __name__ == "__main__":
-    init_db()
+    asyncio.run(init_db())
