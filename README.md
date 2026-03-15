@@ -198,4 +198,5 @@ Before pushing:
 
 ## License
 
-Add your preferred license before publishing.
+Licensed under the MIT License.
+
