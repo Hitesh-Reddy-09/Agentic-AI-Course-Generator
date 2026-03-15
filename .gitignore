@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+.env
+.chroma/
+*.egg-info/
+frontend-course-creator-ai/node_modules/
+frontend-course-creator-ai/dist/
